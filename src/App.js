@@ -1,10 +1,12 @@
-import logo from './logo.svg';
 import './App.scss';
+import SideBar from './components/SideBar';
+import Message from './components/Message';
 
 function App() {
   return (
-    <div className="App">
-      <p>Hello World</p>
+    <div className='app'>
+      <SideBar />
+      <Message />      
     </div>
   );
 }
