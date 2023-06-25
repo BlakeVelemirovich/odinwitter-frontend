@@ -6,7 +6,7 @@ const SideBar = () => {
       <ul>
         {links.map((link, index) => (
           <li key={index}>
-            <a href="http://localhost:3000/">{link}</a>
+            <a href={"http://localhost:3000/" + link}>{link}</a>
           </li>
         ))}
       </ul>

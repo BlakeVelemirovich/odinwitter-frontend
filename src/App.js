@@ -1,13 +1,23 @@
 import './App.scss';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SideBar from './components/SideBar';
-import Message from './components/Message';
+import Main from './components/Main';
+import Profile from './components/Profile';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
-    <div className='app'>
-      <SideBar />
-      <Message />      
-    </div>
+    <Router>
+      <div className='app'>
+        <SideBar />
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='home' element={<Main />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

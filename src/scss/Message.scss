@@ -1,0 +1,16 @@
+.message-container {
+    display: flex;
+
+    .message-content {
+        
+        .user-info {
+            display: flex;
+        }
+
+        .message-interactions {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+        }
+    }
+}
