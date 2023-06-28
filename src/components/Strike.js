@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Strike = () => {
+const Strike = ({ messagesArray, addMessage }) => {
     const [inputValue, setInputValue] = useState('');
 
     // Sends post submitted to the backend for processing
@@ -17,7 +17,9 @@ const Strike = () => {
             });
 
             const data = await response.json();
-            console.log('Response from backend: ', data);
+            console.log(data)
+            addMessage(data);
+            
         } catch (err) {
             console.log(err);
         }

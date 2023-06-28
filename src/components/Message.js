@@ -1,4 +1,4 @@
-const Message = ({ post }) => {
+const Message = ({ message }) => {
 
     return (
         <div className="message-container">
@@ -7,10 +7,10 @@ const Message = ({ post }) => {
             </div>
             <div className='message-content'>
                 <div className='user-info'>
-                    <p>{post.Nickname}</p>
-                    <p>{post.User}</p>
+                    <p>{'Charlotte'}</p>
+                    <p>{'SpiderWeb'}</p>
                 </div>
-                <p>{post.Message}</p>
+                <p>{message.message}</p>
                 <p>Date and Time</p>
                 <div className='message-interactions'>
                     <p>l</p>
