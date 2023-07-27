@@ -1,5 +1,13 @@
-const SideBar = () => {
-  const links = ['Home', 'Profile', 'Notifications', 'Messages', 'Logout'];
+import { useNavigate } from "react-router-dom";
+
+const SideBar = ({ onLogout }) => {
+  const links = ['Home', 'Profile', 'Notifications', 'Messages'];
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    onLogout();
+    navigate('/');
+  }
 
   return (
     <div className="side-bar">
@@ -9,6 +17,7 @@ const SideBar = () => {
             <a href={"http://localhost:3000/" + link}>{link}</a>
           </li>
         ))}
+        <li><button onClick={onLogout}>Logout</button></li>
       </ul>
     </div>
   );

@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [errors, setErrors] = useState('');
+    const [errors, setErrors] = useState({ errors: ' ' });
+    const navigate = useNavigate();
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -38,10 +40,12 @@ const Signup = () => {
         setErrors(newErrors);
     }
 
+    useEffect(() => {
+        validateForm();
+    }, [username, password, confirmPassword]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        validateForm();
 
         if (Object.keys(errors).length === 0) {
             try {
@@ -53,10 +57,19 @@ const Signup = () => {
                 body: JSON.stringify({ username, password })
             });
 
+            const data = await response.json();
+
             if (response.ok) {
-                console.log('success');
+                console.log('post request success');
+                setErrors({});
+                navigate('/');
+            } else {
+                if (response.status === 400) { 
+                    const newErrors = {};
+                    newErrors.duplicateUser = data.error;
+                    setErrors(newErrors);
+                }
             }
-            else console.log('failure');
 
             } catch (err) {
                 console.error('Error', err);
@@ -72,6 +85,7 @@ const Signup = () => {
                 <label htmlFor='username'>Username</label>
                 <input type='text' name='username' value={username} onChange={handleUsernameChange}/>
                 {errors.username && <span>{errors.username}</span>}
+                {errors.duplicateUser && <span>{errors.duplicateUser}</span>}
                 
                 <label htmlFor='password'>Password</label>
                 <input type='password' name='password' value={password} onChange={handlePasswordChange}/>
